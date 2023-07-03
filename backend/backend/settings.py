@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bikeshop',
     'rest_framework',
     'corsheaders',
+    'coverage',
 ]
 
 MIDDLEWARE = [

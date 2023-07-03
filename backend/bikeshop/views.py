@@ -3,13 +3,16 @@ from rest_framework import viewsets
 from .serializers import *
 from .models import *
 
+
 class TireView(viewsets.ModelViewSet):
     serializer_class = TireSerializer
     queryset = Tire.objects.all()
 
+
 class FrameView(viewsets.ModelViewSet):
     serializer_class = FrameSerializer
     queryset = Frame.objects.all()
+
 
 class SeatView(viewsets.ModelViewSet):
     serializer_class = SeatSerializer
@@ -19,6 +22,7 @@ class SeatView(viewsets.ModelViewSet):
 class WheelView(viewsets.ModelViewSet):
     serializer_class = WheelSerializer
     queryset = Wheel.objects.all()
+
 
 class BikeView(viewsets.ModelViewSet):
     serializer_class = BikeSerializer

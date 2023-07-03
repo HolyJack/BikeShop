@@ -4,16 +4,20 @@ from .constants import *
 
 
 class ItemId(models.Model):
-    id = models.CharField(primary_key=True, max_length=6, unique=True, editable=False, blank=False)
+    ID_LENGHT = 6
+    
+    id = models.CharField(primary_key=True, max_length=ID_LENGHT, unique=True, editable=False, blank=False)
     
     
 class Item(models.Model):
-    id = models.CharField(primary_key=True, max_length=6, unique=True, editable=False, blank=False) 
+    ID_LENGHT = 6
+    
+    id = models.CharField(primary_key=True, max_length=ID_LENGHT, unique=True, editable=False, blank=False) 
     name = models.CharField(max_length=255)
     active = models.BooleanField(default=False)
     date_added =  models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
-    quantity = models.IntegerField()
+    quantity = models.PositiveIntegerField()
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     
     class Meta:
@@ -31,7 +35,7 @@ class Item(models.Model):
     
     def generate_unique_id(self):
         MAX_RETRIES = 10
-        length = 6
+        length = self.ID_LENGHT
         retries = 0
         ids = ItemId.objects.all()
         
@@ -46,22 +50,53 @@ class Item(models.Model):
     
     
 class Tire(Item):    
-    type = models.CharField(max_length=8, choices=TIRE_TYPES)
-    
+    type = models.CharField(max_length=50, choices=TIRE_TYPES)
+
+
 class Frame(Item):    
-    type = models.CharField(max_length=19, choices=FRAME_TYPES) 
-    material = models.CharField(max_length=12, choices=MATERIALS)
+    type = models.CharField(max_length=50, choices=FRAME_TYPES) 
+    material = models.CharField(max_length=50, choices=MATERIALS)
     weight = models.DecimalField(max_digits=5, decimal_places=2)
 
+
 class Seat(Item):
-    type = models.CharField(max_length=27, choices=SEATS_TYPES)
+    type = models.CharField(max_length=50, choices=SEATS_TYPES)
+    
     
 class Wheel(Item):   
-    type = models.CharField(max_length=21, choices=WHEEL_TYPES)
+    type = models.CharField(max_length=50, choices=WHEEL_TYPES)
+
 
 class Bike(Item):
     frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
     tires = models.ForeignKey(Tire, on_delete=models.CASCADE)
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
     wheel = models.ForeignKey(Wheel, on_delete=models.CASCADE)
+
+
+class Order(models.Model):
+    ID_LENGHT = 4
     
+    id = models.CharField(primary_key=True, max_length=ID_LENGHT, unique=True, editable=False, blank=False)
+    
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.id = self.generate_unique_id()
+        
+        ItemId(id=self.id).save()
+        super().save(*args, **kwargs)
+    
+    def generate_unique_id(self):
+        MAX_RETRIES = 10
+        length = ID_LENGHT
+        retries = 0
+        ids = ItemId.objects.all()
+        
+        while retries < MAX_RETRIES:
+            id = get_random_string(length=length)
+            
+            if not ids.filter(id=id).exists():
+                return id
+            retries += 1
+        
+        raise ValueError("Failed to generate new ID.")

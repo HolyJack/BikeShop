@@ -2,3 +2,4 @@
 **/staticfiles/**
 **/djangoenv/**
 **/.env
+**/.coverage
