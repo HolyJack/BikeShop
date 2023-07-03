@@ -97,13 +97,47 @@ class ModelInstanceCreator(TestCase):
             )
         
 
-class ItemIdTest(TestCase):
+class ItemIdTests(TestCase):
     
     def test_tire_id_creation(self):
         t = ModelInstanceCreator.create_tire()
-        i = ItemId.objects.all().filter(id=t.id)[0]
+        i = ItemId.objects.all().filter(id=t.id)
+        self.assertTrue(len(i)==1)
+        i = i[0]
         self.assertEqual(t.id, i.id)
+        self.assertEqual(t.id.__class__, i.id.__class__)
 
+    def test_frame_id_creation(self):
+        f = ModelInstanceCreator.create_frame()
+        i = ItemId.objects.all().filter(id=f.id)
+        self.assertTrue(len(i)==1)
+        i = i[0]
+        self.assertEqual(f.id, i.id)
+        self.assertEqual(f.id.__class__, i.id.__class__)
+    
+    def test_seat_id_creation(self):
+        s = ModelInstanceCreator.create_seat()
+        i = ItemId.objects.all().filter(id=s.id)
+        self.assertTrue(len(i)==1)
+        i = i[0]
+        self.assertEqual(s.id, i.id)
+        self.assertEqual(s.id.__class__, i.id.__class__)
+    
+    def test_wheel_id_creation(self):
+        w = ModelInstanceCreator.create_wheel()
+        i = ItemId.objects.all().filter(id=w.id)
+        self.assertTrue(len(i)==1)
+        i = i[0]
+        self.assertEqual(w.id, i.id)
+        self.assertEqual(w.id.__class__, i.id.__class__)
+    
+    def test_bike_id_creation(self):
+        b = ModelInstanceCreator.create_bike()
+        i = ItemId.objects.all().filter(id=b.id)
+        self.assertTrue(len(i)==1)
+        i = i[0]
+        self.assertEqual(b.id, i.id)
+        self.assertEqual(b.id.__class__, i.id.__class__)
 
 class TireTest(TestCase):
 
