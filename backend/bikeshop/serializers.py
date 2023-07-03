@@ -6,25 +6,25 @@ class TireSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Tire
-        fields = ("id", "name", "type", "unit_price")
+        fields = ("id", "name", "quantity", "type", "unit_price")
     
 class FrameSerializer(serializers.ModelSerializer): 
     
     class Meta:
         model = Frame
-        fields = ("id", "name", "type", "material", "weight", "unit_price")
+        fields = ("id", "name", "quantity", "type", "material", "weight", "unit_price")
 
 class SeatSerializer(serializers.ModelSerializer): 
     
     class Meta:
         model = Seat
-        fields = ("id", "name", "type", "unit_price")
+        fields = ("id", "name", "quantity", "type", "unit_price")
 
 class WheelSerializer(serializers.ModelSerializer): 
     
     class Meta:
         model = Wheel
-        fields = ("id", "name", "type", "unit_price")
+        fields = ("id", "name",  "quantity", "type", "unit_price")
 
 
 class BikeSerializer(serializers.ModelSerializer): 
@@ -35,7 +35,7 @@ class BikeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bike
-        fields = ("id", "name", "frame", "tires", "seat", "wheel", "unit_price")
+        fields = ("id", "name", "quantity", "frame", "tires", "seat", "wheel", "unit_price")
 
     @staticmethod
     def setup_eager_loading(queryset):

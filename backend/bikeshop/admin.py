@@ -1,24 +1,30 @@
 from django.contrib import admin
 from .models import *
 
-class FrameAdmin(admin.ModelAdmin):
+
+class ItemAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class FrameAdmin(ItemAdmin):
     pass
 
 
-class SeatAdmin(admin.ModelAdmin):
+class SeatAdmin(ItemAdmin):
     pass
 
 
-class TireAdmin(admin.ModelAdmin):
+class TireAdmin(ItemAdmin):
     pass
 
 
-class WheelAdmin(admin.ModelAdmin):
+class WheelAdmin(ItemAdmin):
     pass
 
 
-class BikeAdmin(admin.ModelAdmin):
+class BikeAdmin(ItemAdmin):
     pass
+
 
 admin.site.register(Frame, FrameAdmin)
 admin.site.register(Seat, SeatAdmin)
