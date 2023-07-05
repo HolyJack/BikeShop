@@ -26,8 +26,10 @@ router.register(r'variations', views.VariationView, 'variation')
 router.register(r'variation_options', views.VariationOptionView, 'variation_options')
 router.register(r'product', views.ProductView, 'product')
 router.register(r'product_items', views.ProductItemView, 'product_items')
+#router.register(r'register', views.UserRegistrationView, basename='user-registration')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('register/', views.UserRegisterView.as_view(), name='user')
 ]
