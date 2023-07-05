@@ -2,32 +2,28 @@ from django.contrib import admin
 from .models import *
 
 
-class ItemAdmin(admin.ModelAdmin):
-    exclude = ('id',)
-
-
-class FrameAdmin(ItemAdmin):
+class ProductCategoryAdmin(admin.ModelAdmin):
     pass
 
 
-class SeatAdmin(ItemAdmin):
+class VariationAdmin(admin.ModelAdmin):
     pass
 
 
-class TireAdmin(ItemAdmin):
+class VariationOptionAdmin(admin.ModelAdmin):
     pass
 
 
-class WheelAdmin(ItemAdmin):
+class ProductAdmin(admin.ModelAdmin):
     pass
 
 
-class BikeAdmin(ItemAdmin):
+class ProductItemAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Frame, FrameAdmin)
-admin.site.register(Seat, SeatAdmin)
-admin.site.register(Tire, TireAdmin)
-admin.site.register(Wheel, WheelAdmin)
-admin.site.register(Bike, BikeAdmin)
+admin.site.register(ProductCategory, ProductCategoryAdmin)
+admin.site.register(Variation, VariationAdmin)
+admin.site.register(VariationOption, VariationOptionAdmin)
+admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductItem, ProductItemAdmin)

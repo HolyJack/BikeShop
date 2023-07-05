@@ -1,102 +1,62 @@
 from django.db import models
 from django.utils.crypto import get_random_string
 from .constants import *
+from phonenumber_field.modelfields import PhoneNumberField
 
 
-class ItemId(models.Model):
-    ID_LENGHT = 6
-    
-    id = models.CharField(primary_key=True, max_length=ID_LENGHT, unique=True, editable=False, blank=False)
-    
-    
-class Item(models.Model):
-    ID_LENGHT = 6
-    
-    id = models.CharField(primary_key=True, max_length=ID_LENGHT, unique=True, editable=False, blank=False) 
-    name = models.CharField(max_length=255)
-    active = models.BooleanField(default=False)
+class TimeStampedModel(models.Model):
     date_added =  models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
-    quantity = models.PositiveIntegerField()
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     
     class Meta:
         abstract = True
+
+
+class ProductCategory(models.Model):
+    parent_category_id = models.ForeignKey("ProductCategory", on_delete=models.CASCADE, blank=True, null=True)
+    name = models.CharField(max_length=50)
     
+    class Meta:
+        verbose_name_plural = 'Product categories'
+        
     def __str__(self):
         return self.name
     
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.id = self.generate_unique_id()
-        
-        ItemId(id=self.id).save()
-        super().save(*args, **kwargs)
     
-    def generate_unique_id(self):
-        MAX_RETRIES = 10
-        length = self.ID_LENGHT
-        retries = 0
-        ids = ItemId.objects.all()
-        
-        while retries < MAX_RETRIES:
-            id = get_random_string(length=length)
-            
-            if not ids.filter(id=id).exists():
-                return id
-            retries += 1
-        
-        raise ValueError("Failed to generate new ID.")
+class Variation(models.Model):
+    category_id = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
     
-    
-class Tire(Item):    
-    type = models.CharField(max_length=50, choices=TIRE_TYPES)
+    def __str__(self):
+        return self.name
 
 
-class Frame(Item):    
-    type = models.CharField(max_length=50, choices=FRAME_TYPES) 
-    material = models.CharField(max_length=50, choices=MATERIALS)
-    weight = models.DecimalField(max_digits=5, decimal_places=2)
-
-
-class Seat(Item):
-    type = models.CharField(max_length=50, choices=SEATS_TYPES)
+class VariationOption(models.Model):
+    variation_id = models.ForeignKey(Variation, on_delete=models.CASCADE) 
+    value = models.CharField(max_length=50)
     
+    def __str__(self):
+        return f"{self.variation_id.name}: {self.value}"
+  
     
-class Wheel(Item):   
-    type = models.CharField(max_length=50, choices=WHEEL_TYPES)
+class Product(models.Model):
+    category_id = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    product_description = models.CharField(max_length=255)
+    product_image = models.URLField(max_length=200, blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
 
 
-class Bike(Item):
-    frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
-    tires = models.ForeignKey(Tire, on_delete=models.CASCADE)
-    seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
-    wheel = models.ForeignKey(Wheel, on_delete=models.CASCADE)
+class ProductItem(models.Model):
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    sku = models.CharField("SKU", max_length=255, blank=True, null=True)
+    qty_in_stock = models.PositiveIntegerField()
+    img = models.URLField(max_length=200, blank=True)
+    price = models.DecimalField("Price", max_digits=5, decimal_places=2)
+    variations = models.ManyToManyField(VariationOption, blank=True)
+    
+    def __str__(self):
+        return f'{self.product_id.name} {self.sku} {self.qty_in_stock}'
 
-
-class Order(models.Model):
-    ID_LENGHT = 4
-    
-    id = models.CharField(primary_key=True, max_length=ID_LENGHT, unique=True, editable=False, blank=False)
-    
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.id = self.generate_unique_id()
-        
-        ItemId(id=self.id).save()
-        super().save(*args, **kwargs)
-    
-    def generate_unique_id(self):
-        MAX_RETRIES = 10
-        length = ID_LENGHT
-        retries = 0
-        ids = ItemId.objects.all()
-        
-        while retries < MAX_RETRIES:
-            id = get_random_string(length=length)
-            
-            if not ids.filter(id=id).exists():
-                return id
-            retries += 1
-        
-        raise ValueError("Failed to generate new ID.")

@@ -4,30 +4,30 @@ from .serializers import *
 from .models import *
 
 
-class TireView(viewsets.ModelViewSet):
-    serializer_class = TireSerializer
-    queryset = Tire.objects.all()
+# API for Product fields
 
-
-class FrameView(viewsets.ModelViewSet):
-    serializer_class = FrameSerializer
-    queryset = Frame.objects.all()
-
-
-class SeatView(viewsets.ModelViewSet):
-    serializer_class = SeatSerializer
-    queryset = Seat.objects.all()
-
-
-class WheelView(viewsets.ModelViewSet):
-    serializer_class = WheelSerializer
-    queryset = Wheel.objects.all()
-
-
-class BikeView(viewsets.ModelViewSet):
-    serializer_class = BikeSerializer
+class ProductCategoryView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = ProductCategorySerializer
+    queryset = ProductCategory.objects.all()
+  
     
-    def get_queryset(self):
-        queryset = Bike.objects.all()
-        queryset = BikeSerializer.setup_eager_loading(queryset)
-        return queryset
+class VariationView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = VariationSerializer
+    queryset = Variation.objects.all()
+  
+    
+class VariationOptionView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = VariationOptionSerializer
+    queryset = VariationOption.objects.all()
+  
+    
+class ProductView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+
+
+class ProductItemView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = ProductItemSerializer
+    queryset = ProductItem.objects.all()
+
+#

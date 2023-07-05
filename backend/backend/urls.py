@@ -19,13 +19,13 @@ from django.urls import path, include
 from bikeshop import views
 from rest_framework import routers
 
-router = routers.DefaultRouter()
 
-router.register(r'tires', views.TireView, 'tire')
-router.register(r'frames', views.FrameView, 'frame')
-router.register(r'seats', views.SeatView, 'seat')
-router.register(r'wheels', views.WheelView, 'wheel')
-router.register(r'bikes', views.BikeView, 'bike')
+router = routers.DefaultRouter()
+router.register(r'product_categories', views.ProductCategoryView, 'product_category')
+router.register(r'variations', views.VariationView, 'variation')
+router.register(r'variation_options', views.VariationOptionView, 'variation_options')
+router.register(r'product', views.ProductView, 'product')
+router.register(r'product_items', views.ProductItemView, 'product_items')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
