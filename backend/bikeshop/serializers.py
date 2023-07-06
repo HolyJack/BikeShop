@@ -67,8 +67,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         
-        validated_data['password'] = make_password(validated_data['password'])
-        
         user = User.objects.create_user(
             email=validated_data['email'], 
             password=validated_data['password']
@@ -76,18 +74,39 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         
         return user
 
+
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
     
-    def check_user(self, clean_data):
-        user = authenticate(email=clean_data['email'], password=clean_data['password'])
-        if not user:
-            raise ValidationError('user not found')
+    class Meta:
+        model = User
+        fields = ['email', 'password']
+    
+    def check_user(self, request):
+        email = request.data['email']
+        password = request.data['password']
+        
+        if email and password:
+            user = authenticate(request=request, username=email, password=password)
+            
+            if not user:
+                raise serializers.ValidationError('Invalid user or password')
+        else:
+            raise serializers.ValidationError('Email and password are required.')
+        
         return user
 
 
-class UserSerializer(serializers.Serializer):
+class UserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=False)
+    
     class Meta:
-        model: User
-        fields = ('email', 'username')
+        model = User
+        exclude = [
+            'is_superuser',
+            'is_staff',
+            'groups',
+            'user_permissions',
+            'password'
+            ]
