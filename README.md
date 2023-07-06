@@ -30,13 +30,6 @@ Disclaimer: The following API is yet to be implemented and subject to change.
 * POST /customers: Allow any authenticated user.
 * PUT /customers/{id}: Allow only admin users.
 * DELETE /customers/{id}: Allow only admin users.
-## Reviews:
-
-* GET /products/{id}/reviews: Allow any authenticated user.
-* GET /reviews/{id}: Allow any authenticated user.
-* POST /products/{id}/reviews: Allow any authenticated user.
-* PUT /reviews/{id}: Allow only the author of the review or admin users.
-* DELETE /reviews/{id}: Allow only the author of the review or admin users.
 ## Authentication and Authorization:
 
 * POST /login: Allow any user.
