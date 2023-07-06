@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from phonenumber_field.modelfields import PhoneNumberField
 from .countries import COUNTRIES
+from django.apps import apps
 
 class CustomUserManager(BaseUserManager):
     
@@ -14,6 +15,9 @@ class CustomUserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
+        
+        member = apps.get_model('orders.Cart')
+        member.objects.create(user_id=user)
         
         return user
 
