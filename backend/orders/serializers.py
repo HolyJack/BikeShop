@@ -4,7 +4,7 @@ from .models import *
 class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
-        exclude = ['id']
+        fields = '__all__'
 
 
 class CartSerializer(serializers.ModelSerializer):

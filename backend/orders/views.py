@@ -23,3 +23,14 @@ class CartView(APIView):
                 return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+class CartItemView(APIView):
+    serializers_class = CartItemSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def put(self, request):
+        pass
+    
+    def destroy(self, request):
+        pass
