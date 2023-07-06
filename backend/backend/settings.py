@@ -37,11 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bikeshop',
     'rest_framework',
     'corsheaders',
     'coverage',
     'phonenumber_field',
+    'accounts',
+    'orders',
+    'payments',
+    'products'
 ]
 
 MIDDLEWARE = [
@@ -132,4 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Defining user Auntification model
 
-AUTH_USER_MODEL = "bikeshop.User"
+AUTH_USER_MODEL = "accounts.User"

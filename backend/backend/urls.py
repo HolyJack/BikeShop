@@ -16,22 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from bikeshop import views
-from rest_framework import routers
-
-
-router = routers.DefaultRouter()
-router.register(r'product_categories', views.ProductCategoryView, 'product_category')
-router.register(r'variations', views.VariationView, 'variation')
-router.register(r'variation_options', views.VariationOptionView, 'variation_options')
-router.register(r'product', views.ProductView, 'product')
-router.register(r'product_items', views.ProductItemView, 'product_items')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    path('register/', views.UserRegisterView.as_view()),
-    path('login/', views.UserLoginView.as_view()),
-    path('logout/', views.UserLogoutView.as_view()),
-    path('user-info/', views.UserView.as_view())
+    path('/', include('accounts.urls')),
+    path('/', include('products.urls')),
 ]
