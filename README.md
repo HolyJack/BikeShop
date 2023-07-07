@@ -6,7 +6,7 @@ Disclaimer: The following API is yet to be implemented and subject to change.
 
 * GET /products: Allow any user.
 * GET /products/{id}: Allow any user.
-* POST /products: Allow only admin users (IsAdminUser). -
+* POST /products: Allow only admin users. -
 * PUT /products/{id}: Allow only admin users. -
 * DELETE /products/{id}: Allow only admin users. -
 ## Categories:
