@@ -23,13 +23,13 @@ Disclaimer: The following API is yet to be implemented and subject to change.
 * POST /orders: Allow any authenticated user.
 * PUT /orders/{id}: Allow only admin users.
 * DELETE /orders/{id}: Allow only admin users.
-## Customers:
+## Users:
 
-* GET /customers: Allow only admin users.
-* GET /customers/{id}: Allow only admin users.
-* POST /customers: Allow any authenticated user.
-* PUT /customers/{id}: Allow only admin users.
-* DELETE /customers/{id}: Allow only admin users.
+* GET /users: Allow only admin users.
+* GET /users/{id}: Allow only admin users.
+* POST /users: Allow only admin users.
+* PUT /users/{id}: Allow only admin users.
+* DELETE /users/{id}: Allow only admin users.
 ## Authentication and Authorization:
 
 * POST /login: Allow any user.
