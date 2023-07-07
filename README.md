@@ -18,11 +18,11 @@ Disclaimer: The following API is yet to be implemented and subject to change.
 * DELETE /categories/{id}: Allow only admin users. -
 ## Orders:
 
-* GET /orders: Allow only admin users. -
-* GET /orders/{id}: Allow only admin users. -
-* POST /orders: Allow any authenticated user. -
-* PUT /orders/{id}: Allow only admin users. -
-* DELETE /orders/{id}: Allow only admin users. -
+* GET /orders: Allow only admin users. 
+* GET /orders/{id}: Allow only admin users. 
+* POST /orders: Allow any authenticated user. 
+* PUT /orders/{id}: Allow only admin users. 
+* DELETE /orders/{id}: Allow only admin users. 
 ## Users:
 
 * GET /users: Admin users only. Use 'show_inactive=true' to include inactive users.
