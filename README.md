@@ -6,16 +6,16 @@ Disclaimer: The following API is yet to be implemented and subject to change.
 
 * GET /products: Allow any user.
 * GET /products/{id}: Allow any user.
-* POST /products: Allow only admin users. -
-* PUT /products/{id}: Allow only admin users. -
-* DELETE /products/{id}: Allow only admin users. -
+* POST /products: Allow only admin users.
+* PUT /products/{id}: Allow only admin users.
+* DELETE /products/{id}: Allow only admin users.
 ## Categories:
 
 * GET /categories: Allow any authenticated user.
 * GET /categories/{id}: Allow any authenticated user.
-* POST /categories: Allow only admin users. -
-* PUT /categories/{id}: Allow only admin users. -
-* DELETE /categories/{id}: Allow only admin users. -
+* POST /categories: Allow only admin users.
+* PUT /categories/{id}: Allow only admin users.
+* DELETE /categories/{id}: Allow only admin users.
 ## Orders:
 
 * GET /orders: Allow only admin users. 
