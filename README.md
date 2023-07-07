@@ -37,7 +37,7 @@ Disclaimer: The following API is yet to be implemented and subject to change.
 * POST /register: Allow any user.
 * GET /me: Allow any authenticated user.
 ## Cart:
-
+(needs permissions fixes)
 * GET /cart: Allow any authenticated user.
 * POST /cart: Allow any authenticated user.
 * PUT /cart/{id}: Allow any authenticated user.
