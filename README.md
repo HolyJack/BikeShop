@@ -25,7 +25,7 @@ Disclaimer: The following API is yet to be implemented and subject to change.
 * DELETE /orders/{id}: Allow only admin users.
 ## Users:
 
-* GET /users: Admin users only. Retrieve a list of users. By default, only active users are included. Use 'show_inactive=true' to include inactive users.
+* GET /users: Admin users only. Use 'show_inactive=' to include inactive users.
 * GET /users/{id}: Allow only admin users.
 * POST /users: Allow only admin users.
 * PUT /users/{id}: Allow only admin users.
