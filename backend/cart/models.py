@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Cart(models.Model):
-    user_id = models.ForeignKey("accounts.User", auto_created=True ,on_delete=models.CASCADE)
+    user_id = models.ForeignKey("accounts.User", auto_created=True ,on_delete=models.CASCADE, related_name='cart')
 
     def __str__(self):
         return f'{self.id}'
