@@ -5,6 +5,8 @@ class ShippingMethod(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=5, decimal_places=2)
 
+    def __str__(self):
+        return self.name
 
 class ShopOrder(models.Model):
     PENDING = 'PE'
@@ -33,4 +35,4 @@ class ShopOrder(models.Model):
     payment_method = models.ForeignKey("payments.PaymentMethod", on_delete=models.PROTECT)
     shipping_adress = models.ForeignKey("accounts.UserAdress", on_delete=models.PROTECT)
     shipping_method = models.ForeignKey(ShippingMethod, on_delete=models.PROTECT)
-    order_status = models.CharField(max_length=50, choices=ORDER_STATUSES)
+    order_status = models.CharField(max_length=50, choices=ORDER_STATUSES, default=ORDER_STATUSES[0])

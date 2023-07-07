@@ -59,7 +59,7 @@ class UserAdress(models.Model):
     is_default = models.BooleanField(default=False)
     name = models.CharField(max_length=1024)
     address1 = models.CharField(max_length=1024)
-    address2 = models.CharField(max_length=1024)
+    address2 = models.CharField(max_length=1024, blank=True)
     zip_code = models.CharField(max_length=12)
     city = models.CharField(max_length=1024)
     region = models.CharField(max_length=1024)
@@ -71,3 +71,7 @@ class UserAdress(models.Model):
         if not UserAdress.objects.filter(user_id=True).exists():
             self.is_default = True
         super().save(*args, **kwargs)
+
+    
+    def __str__(self):
+        return f'{self.name}'
