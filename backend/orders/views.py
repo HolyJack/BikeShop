@@ -34,6 +34,9 @@ class CartItemView(APIView):
         except CartItem.DoesNotExist:
             return Response("Cart item not found", status=status.HTTP_404_NOT_FOUND)
         
+        if cart_item.cart_id.user_id != request.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        
         serializer = CartItemSerializer(cart_item)
         
         return Response(serializer.data)
@@ -45,6 +48,9 @@ class CartItemView(APIView):
         except CartItem.DoesNotExist:
             return Response("Cart item not found", status=status.HTTP_404_NOT_FOUND)
 
+        if cart_item.cart_id.user_id != request.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        
         serializer = CartItemSerializer(cart_item, data=request.data)
         
         if serializer.is_valid():
@@ -59,6 +65,9 @@ class CartItemView(APIView):
             cart_item = CartItem.objects.get(id=id)
         except CartItem.DoesNotExist:
             return Response("Cart item not found", status=status.HTTP_404_NOT_FOUND)
+        
+        if cart_item.cart_id.user_id != request.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
         cart_item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

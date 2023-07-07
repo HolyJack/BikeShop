@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
-from .models import User
+from .models import *
 
 #   Aunthetication
 
@@ -44,9 +44,17 @@ class UserLoginSerializer(serializers.Serializer):
         
         return user
 
+ 
+class UserAdressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAdress
+        fields = '__all__'
+    
+
 
 class UserMeSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=False)
+    user_adresses = UserAdressSerializer(many=True)
     
     class Meta:
         model = User
@@ -57,3 +65,10 @@ class UserMeSerializer(serializers.ModelSerializer):
             'user_permissions',
             'password'
             ]
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = '__all__'

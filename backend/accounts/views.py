@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout
-from rest_framework import permissions, status
+from rest_framework import permissions, status, generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -73,4 +73,32 @@ class UserMeView(APIView):
 
 
 class UserAdressesView(APIView):
-    pass
+    serializers_class = UserAdressSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class UsersView(generics.ListCreateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser]
+    
+    
+    def get_queryset(self):
+        if self.request.GET.get('show_inactive') == 'true':
+            queryset = User.objects.all()
+        else:
+            queryset = User.objects.filter(is_active=True)
+            
+        return queryset
+
+
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser]
+    
+    
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.is_active = False
+        instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)

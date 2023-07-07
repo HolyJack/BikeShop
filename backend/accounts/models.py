@@ -55,7 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 class UserAdress(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_adresses")
     is_default = models.BooleanField(default=False)
     name = models.CharField(max_length=1024)
     address1 = models.CharField(max_length=1024)
