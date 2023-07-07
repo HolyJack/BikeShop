@@ -34,7 +34,7 @@ Disclaimer: The following API is yet to be implemented and subject to change.
 
 * POST /login: Allow any user.
 * POST /logout: Allow any authenticated user.
-* POST /register: Allow any user.
+* POST /register: Allow any user. (Needs more strict password processing)
 * GET /me: Allow any authenticated user.
 ## Cart:
 (needs permissions fixes)
