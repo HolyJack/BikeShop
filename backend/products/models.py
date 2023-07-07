@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class TimeStampedModel(models.Model):
@@ -12,6 +13,7 @@ class TimeStampedModel(models.Model):
 class ProductCategory(TimeStampedModel, models.Model):
     parent_category_id = models.ForeignKey("ProductCategory", on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=50)
+    
     
     class Meta:
         verbose_name_plural = 'Product categories'

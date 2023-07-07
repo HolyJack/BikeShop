@@ -31,13 +31,7 @@ class VariationOptionSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = [
-            'id',
-            'category_id',
-            'name',
-            'product_description',
-            'product_image'
-            ]
+        fields = '__all__'
 
 
 class ProductItemSerializer(serializers.ModelSerializer):
