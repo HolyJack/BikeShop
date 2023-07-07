@@ -1,57 +1,31 @@
 from rest_framework import viewsets, generics, permissions, status
 from .serializers import *
 from .models import *
+from .permissions import AllowAnyReadOnlyOrStaff
 
 
-# class ProductCategoryView(viewsets.ReadOnlyModelViewSet):
-#     serializer_class = ProductCategorySerializer
-#     queryset = ProductCategory.objects.all()
-    
-    
-# class VariationView(viewsets.ReadOnlyModelViewSet):
-#     serializer_class = VariationSerializer
-#     queryset = Variation.objects.all()
-  
-    
-# class VariationOptionView(viewsets.ReadOnlyModelViewSet):
-#     serializer_class = VariationOptionSerializer
-    
-#     def get_queryset(self):
-#         queryset = VariationOption.objects.all()
-#         queryset = VariationOptionSerializer.setup_eager_loading(queryset)
-#         return queryset
-    
-    
-# class ProductView(viewsets.ReadOnlyModelViewSet):
-#     serializer_class = ProductSerializer
-#     queryset = Product.objects.all()
 
-
-# class ProductItemView(viewsets.ReadOnlyModelViewSet):
-#     serializer_class = ProductItemSerializer
-#     queryset = ProductItem.objects.all()
-
-class ProductsView(generics.ListAPIView):
+class ProductsView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AllowAnyReadOnlyOrStaff]
     
 
-class ProductView(generics.RetrieveAPIView):
+class ProductView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AllowAnyReadOnlyOrStaff]
     
 
-class CategoriesView(generics.ListAPIView):
+class CategoriesView(generics.ListCreateAPIView):
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategorySerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AllowAnyReadOnlyOrStaff]
 
 
-class CategoryView(generics.RetrieveAPIView):
+class CategoryView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategorySerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AllowAnyReadOnlyOrStaff]
     
 

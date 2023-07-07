@@ -16,7 +16,7 @@ class CustomUserManager(BaseUserManager):
         user.set_password(password)
         user.save()
         
-        member = apps.get_model('orders.Cart')
+        member = apps.get_model('cart.Cart')
         member.objects.create(user_id=user)
         
         return user
