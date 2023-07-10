@@ -1,7 +1,7 @@
 # BikeShop
 Backend for bikeshop e-commerce website.
 # API
-Disclaimer: The following API is yet to be implemented and subject to change.
+Disclaimer: The following API is implemented but could be subject to change.
 ## Products:
 
 * GET /products: Allow any user.
