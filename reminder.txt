@@ -1,0 +1,16 @@
+Setup PostgreSQL for cloud_user Access
+Create a cloud_user database and a cloud_user user with a password. Grant all priveleges to database cloud_user by user cloud_user.
+
+Start psql: sudo -u postgres psql
+Create Database: CREATE DATABASE cloud_user;
+Create User: CREATE USER cloud_user WITH ENCRYPTED PASSWORD 'cloud_user';
+Grant Access to Database by User: GRANT ALL PRIVILEGES ON DATABASE cloud_user TO cloud_user;
+Leave psql: \q
+
+Imports and Database connection string.
+The PostgreSQL standard port is 5432.
+
+import pandas as pd
+import psycopg2
+
+CONNECT_DB = "host=localhost port=5432 dbname=cloud_user user=cloud_user password=cloud_user"
