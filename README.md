@@ -38,7 +38,7 @@ Disclaimer: The following API is implemented but could be subject to change.
 * GET /api/me: Allow any authenticated user.
 ## Cart:
 (needs permissions fixes)
-* GET /cart: Allow any authenticated user.
-* POST /cart: Allow any authenticated user.
-* PUT /cart/{id}: Allow any authenticated user.
-* DELETE /cart/{id}: Allow any authenticated user.
+* GET /api/cart: Allow any authenticated user.
+* POST /api/cart: Allow any authenticated user.
+* PUT /api/cart/{id}: Allow any authenticated user.
+* DELETE /api/cart/{id}: Allow any authenticated user.
