@@ -4,38 +4,38 @@ Backend for bikeshop e-commerce website.
 Disclaimer: The following API is implemented but could be subject to change.
 ## Products:
 
-* GET /products: Allow any user.
-* GET /products/{id}: Allow any user.
-* POST /products: Allow only admin users.
-* PUT /products/{id}: Allow only admin users.
-* DELETE /products/{id}: Allow only admin users.
+* GET /api/products: Allow any user.
+* GET /api/products/{id}: Allow any user.
+* POST /api/products: Allow only admin users.
+* PUT /api/products/{id}: Allow only admin users.
+* DELETE /api/products/{id}: Allow only admin users.
 ## Categories:
 
-* GET /categories: Allow any authenticated user.
-* GET /categories/{id}: Allow any authenticated user.
-* POST /categories: Allow only admin users.
-* PUT /categories/{id}: Allow only admin users.
-* DELETE /categories/{id}: Allow only admin users.
+* GET /api/categories: Allow any authenticated user.
+* GET /api/categories/{id}: Allow any authenticated user.
+* POST /api/categories: Allow only admin users.
+* PUT /api/categories/{id}: Allow only admin users.
+* DELETE /api/categories/{id}: Allow only admin users.
 ## Orders:
 
-* GET /orders: Allow only admin users. 
-* GET /orders/{id}: Allow only admin users. 
-* POST /orders: Allow any authenticated user. 
-* PUT /orders/{id}: Allow only admin users. 
-* DELETE /orders/{id}: Allow only admin users. 
+* GET /api/orders: Allow only admin users. 
+* GET /api/orders/{id}: Allow only admin users. 
+* POST /api/orders: Allow any authenticated user. 
+* PUT /api/orders/{id}: Allow only admin users. 
+* DELETE /api/orders/{id}: Allow only admin users. 
 ## Users:
 
-* GET /users: Admin users only. Use 'show_inactive=true' to include inactive users.
-* GET /users/{id}: Allow only admin users.
-* POST /users: Allow only admin users.
-* PUT /users/{id}: Allow only admin users.
-* DELETE /users/{id}: Allow only admin users.
+* GET /api/users: Admin users only. Use 'show_inactive=true' to include inactive users.
+* GET /api/users/{id}: Allow only admin users.
+* POST /api/users: Allow only admin users.
+* PUT /api/users/{id}: Allow only admin users.
+* DELETE /api/users/{id}: Allow only admin users.
 ## Authentication and Authorization:
 
-* POST /login: Allow any user.
-* POST /logout: Allow any authenticated user.
-* POST /register: Allow any user. (Needs more strict password processing)
-* GET /me: Allow any authenticated user.
+* POST /api/login: Allow any user.
+* POST /api/logout: Allow any authenticated user.
+* POST /api/register: Allow any user. (Needs more strict password processing)
+* GET /api/me: Allow any authenticated user.
 ## Cart:
 (needs permissions fixes)
 * GET /cart: Allow any authenticated user.
