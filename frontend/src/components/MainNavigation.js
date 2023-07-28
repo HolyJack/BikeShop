@@ -1,18 +1,11 @@
-import { NavLink } from "react-router-dom";
+import AuthButtons from "./AuthButtons";
+import Navigation from "./Navigation";
 
 const MainNavigation = () => {
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/products">Products</NavLink>
-          </li>
-        </ul>
-      </nav>
+    <header className="p-1 w-full h-16 bg-gray-500 font-mono flex flex-row justify-between">
+      <Navigation />
+      <AuthButtons />
     </header>
   );
 };

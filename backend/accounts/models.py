@@ -75,3 +75,9 @@ class UserAdress(models.Model):
     
     def __str__(self):
         return f'{self.name}'
+
+#from rest_framework.authtoken.models import Token
+
+#for user in User.objects.all():
+#    token = Token.objects.create(user=user)
+#    print(token.key)
