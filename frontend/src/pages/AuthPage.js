@@ -2,11 +2,18 @@ import { Form, json, redirect } from "react-router-dom";
 
 const AuthPage = () => {
   return (
-    <div className="h-full w-96 mx-auto">
-      <Form method="post">
-        <div>
-          <label htmlFor="email">E-mail</label>
+    <div className="h-full w-96 mx-auto font-mono">
+      <Form
+        className="py-6 px-10 m-5 h-full w-fit bg-gray-600 flex flex-col justify-center items-center shadow shadow-gray-900 rounded-xl"
+        method="post"
+      >
+        <h1 className="w-full mb-5 text-center font-bold text-4xl">Login</h1>
+        <div className="  py-1 w-full flex flex-row justify-between items-center">
+          <label className=" w-24 " htmlFor="email">
+            E-mail:
+          </label>
           <input
+            className="px-2 rounded-lg"
             id="email"
             type="email"
             name="email"
@@ -14,13 +21,27 @@ const AuthPage = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" />
+        <div className=" py-1 w-full flex flex-row justify-between items-center">
+          <label className="w-24 " htmlFor="password">
+            Password:
+          </label>
+          <input
+            className="px-2 rounded-lg"
+            id="password"
+            type="password"
+            name="password"
+            required
+          />
         </div>
-        <div>
-          <button type="submit" className="bg-yellow-500">
-            Login
+        <div className=" mt-3 py-2 w-full flex flex-row justify-end items-center">
+          <button className=" m-1 w-20 h-8 bg-transparent rounded-lg">
+            Sign up
+          </button>
+          <button
+            className=" m-1 w-20 h-8 bg-yellow-500 rounded-lg"
+            type="submit"
+          >
+            Sign in
           </button>
         </div>
       </Form>
@@ -52,9 +73,11 @@ export const action = async ({ request }) => {
   if (!responce.ok) {
     throw json({ message: "Could not authenticate user" }, { status: 500 });
   }
+  const resData = await responce.json();
+  const token = resData.token;
 
-  if (responce.ok) {
-    return redirect("/");
-    return responce;
-  }
+  localStorage.setItem("token", token);
+  console.log(token);
+
+  return redirect("/");
 };
